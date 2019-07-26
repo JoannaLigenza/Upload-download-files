@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
-    document.getElementById('upload-file').onchange = function() {
+    document.getElementById("upload-file").onchange = function() {
         const showUploadedFiles = document.getElementById("uploaded-files-text");
         const filesNum = document.getElementById("upload-file").files;
         let fileText = "Selected " + filesNum.length + " files";
@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('submit').addEventListener("click", () => {
         document.getElementById("uploaded-files-text").innerText = "" ;
     });
+
+    document.getElementById("")
     
 
 });

@@ -4,6 +4,10 @@
     --kolor-niebieski: rgb(152, 184, 255);
 }
 
+body {
+    padding: 20px 0;
+}
+
 table {
     width: 100%;
     text-align: center;
