@@ -1,5 +1,8 @@
-<?php include "functions.php" ?>
+<?php 
+    include "../functions.php" ;
+    define("dirCount", count(scandir(dirname(getcwd()).uploads)));
 
+echo('
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,23 +23,24 @@
                 <th class="desktop-visible"> Num:</th> 
                 <th> Directory name:</th> 
                 <th class="files-in-dir"> Files in directory:</th> 
-                <th class='toggle-col'> Download:</th> 
-                <th class='toggle-col'> Delete:</th> 
+                <th class="toggle-col"> Download:</th> 
+                <th class="toggle-col"> Delete:</th> 
             </tr>
         </thead>
         <tbody>
-            <!-- $i=0 => . // $i=1 => .. -->
-            <?php 
+');
+            // $i=0 => . // $i=1 => .. 
             for ($i=2; $i<dirCount; $i++) {  
-                    //  <tr> <td> <?php echo $i-1 </td> <td>  </td> </tr> 
                     $name = scandir(dirname(getcwd()).uploads)[$i];
                     echo "<tr class='toggle-row-click'> <td class='desktop-visible'>" . ($i-1) . "</td> <td class='dir-name'> " . $name . "</td> <td> " . (count(scandir(dirname(getcwd()).uploads.$name)) -2 ). "</td> <td class='toggle-col'> <a href='./?file=$name'> <img src='../img/download.svg' alt='heart-icon' title='Download file'></a>" . "" . "</td> <td class='toggle-col'><a href='./?delete=$name'> <img src='../img/delete.svg' alt='heart-icon' title='Delete file' name='delete-button'></a></td> </tr>";
                     echo "<tr class='toggle-row hidden'>  <td class='blue-color'> <a href='./?file=$name'> <img src='../img/download.svg' alt='download-icon' title='Download file'></a> </td>    <td class='red-color'> <a href='./?delete=$name'> <img src='../img/delete.svg' alt='delete-icon' title='Delete file' name='delete-button'></a>    </td> </tr>";
-            } ?>
+            } 
+echo (' 
         </tbody>
     </table>
     
 <script src="../script.js"></script>
 </body>
 </html>
-
+')  
+?>

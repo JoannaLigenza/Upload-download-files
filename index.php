@@ -1,5 +1,7 @@
-<?php include "functions.php" ?>
+<?php 
+    include "functions.php"; 
 
+    echo ('
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,27 +16,24 @@
     <form action="index.php" method="post" enctype="multipart/form-data">
         <!-- name of input must have [] in name if you want to upload multiply files  -->
         <fieldset>
-            <label for="upload-file" class="button-input"> <img src='img/file.svg' alt='file-icon' title='Download file'> Select Files</label>
+            <label for="upload-file" class="button-input"> <img src="img/file.svg" alt="file-icon" title="Download file"> Select Files</label>
             <input type="file" multiple name="file-name[]" id="upload-file"/>    
-            <label for="submit" class="button-input"> <img src='img/upload.svg' alt='upload-icon' title='Download file'> Upload Files</label>
+            <label for="submit" class="button-input"> <img src="img/upload.svg" alt="upload-icon" title="Download file"> Upload Files</label>
             <input type="submit" name="get-button" id="submit">
-            <div id="uploaded-files-text"> 
-                <?php 
-                    if (file_exists("uploaded-files-text.txt")) { 
-                        //echo readfile("uploaded-files-text.txt");
-                        $filename = "uploaded-files-text.txt";
-                        $handle = fopen($filename, "r");
-                        $contents = fread($handle, filesize($filename));
-                        echo $contents;
-                        fclose($handle);
-                    } 
-                ?>
+            <div id="uploaded-files-text">
+');
+                if (isset($_POST["get-button"])) {
+                    echo uploadFiles();
+                    //header("Location: ./");
+                }
+
+echo ('
             </div>   
         </fieldset>
-        
     </form>
-    
 <script src="script.js"></script>
 </body>
 </html>
+')
+?>
 
