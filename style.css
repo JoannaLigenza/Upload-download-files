@@ -1,0 +1,122 @@
+:root {
+    --kolor-zielony: rgb(66, 255, 129);
+    --kolor-zielony-hover: rgb(0, 247, 132);;
+    --kolor-niebieski: rgb(152, 184, 255);
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 15px 10px;
+}
+
+fieldset {
+    border: none;
+    margin: 20px auto;
+    text-align: center;
+}
+
+input {
+	display: none;
+}
+
+.button-input {
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--kolor-zielony);
+	width: 120px;
+    margin: 2px;
+	border: 1px solid black;
+    border-radius: 5px;
+	text-align: center;
+}
+
+.button-input img {
+    margin-right: 2px;
+    vertical-align: middle;
+}
+
+.button-input:hover {
+    background-color: var(--kolor-zielony-hover);
+}
+
+.button-input:active {
+    transform: translate(2px, 2px);
+}
+
+#uploaded-files-text {
+    margin-top: 20px;
+}
+
+.desktop-visible {
+    display: none;
+}
+
+.toggle-col {
+    display: none;
+}
+
+.toggle-row > td {
+    border: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: table-row;
+}
+
+.files-in-dir {
+    max-width: 50px;
+}
+
+.gray-color {
+    background-color: rgb(240, 240, 240);
+}
+
+.red-color {
+    background-color: rgb(255, 85, 85);
+}
+
+.blue-color {
+    background-color: var(--kolor-niebieski);
+}
+
+.green-color {
+    background-color: var(--kolor-zielony);
+}
+
+
+
+@media (min-width: 600px) {
+
+    table {
+        width: 80%; 
+        margin: 0 auto;
+    }
+
+    .desktop-visible {
+        display: table-cell;
+    }
+
+    .toggle-row {
+        display: none;
+    }
+
+    .toggle-col {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1200px) {
+    table {
+        width: 65%; 
+        margin: 0 auto;
+    }
+}
