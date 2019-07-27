@@ -31,7 +31,6 @@ ini_set('display_errors', 1);
         //var_dump(strlen($_FILES['file-name']['name'][0] ) === 0) ;
         
         $countFiles = count($_FILES["file-name"]["name"]);      // <- for multiply files
-        $noErrors = true;
 
         for ($i=0; $i < $countFiles; $i++) {
             $path = ".".uploads.$dirName."/". $_FILES["file-name"]["name"][$i];
@@ -39,12 +38,9 @@ ini_set('display_errors', 1);
                 //echo "Files uploaded successfully";
             } else {
                 return "There was an error during updating, please try again";
-                $noErrors = false;
             };
         }
-        if ($noErrors) {
-            return "Files uploaded successfully";
-        }
+        return "Files uploaded successfully";
     }
 
     // Delete directory
@@ -99,13 +95,6 @@ ini_set('display_errors', 1);
     }
 
 
-    if (!empty($_GET['delete'])) {
-        deleteDir();
-        header("Location: ./");
-    }
     
-    if (!empty($_GET['file'])) {
-        getFiles();
-    }
 
 ?>

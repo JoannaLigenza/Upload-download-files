@@ -2,6 +2,15 @@
     include "../functions.php" ;
     define("dirCount", count(scandir(dirname(getcwd()).uploads)));
 
+    if (!empty($_GET['delete'])) {
+        deleteDir();
+        header("Location: ./");
+    }
+    
+    if (!empty($_GET['file'])) {
+        getFiles();
+    }
+
 echo('
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +48,7 @@ echo ('
         </tbody>
     </table>
     
-<script src="../script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
 ')  

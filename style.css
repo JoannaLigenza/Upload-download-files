@@ -53,7 +53,38 @@ input {
 }
 
 #uploaded-files-text {
-    margin-top: 20px;
+    margin: 50px 0;
+    height: 50px;
+}
+
+.progress-label {
+    margin:  20px;
+    display: block;
+}
+
+#progress {
+    display: block;
+    width: 250px;
+    height: 30px;
+    margin: 0 auto;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+#progress-value {
+    border-radius: 5px;
+    background: yellow;
+    width: 0;
+    height: 100%;
+    display: flex;
+    /* align-items: center;    */
+}
+
+#progress-text {
+    font-weight: bold;
 }
 
 .desktop-visible {
