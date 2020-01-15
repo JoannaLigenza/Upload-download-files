@@ -34,15 +34,12 @@ ini_set('display_errors', 1);
 
     // Return message after uploading files
     function uploadFiles($fileName) {
-        // $fileName = $_FILES["file-name"]["name"] ;      // <- for one file
-        // echo $_FILES["file-name"]["name"] . "<br>";
         
         if (strlen($fileName[0] ) !== 0) {
             $dirName = makeDir();
         } else {
             return;
         }
-        //var_dump(strlen($_FILES['file-name']['name'][0] ) === 0) ;
         
         $countFiles = count($fileName);      // <- for multiply files
 
