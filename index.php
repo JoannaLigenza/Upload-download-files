@@ -1,13 +1,18 @@
 <?php 
     include "functions.php"; 
 
+    $message = "";
+
     if (isset($_POST["get-button"])) {
-        echo uploadFiles();
-        //header("Location: ./");
+        $fileName = $_FILES['file-name']['name'];
+        if ( validateFileName($fileName) ) {
+            $message = uploadFiles($fileName);
+        } else {
+            $message = 'Change file name before uploading it. <br> File name can only contain letters, digits, space, dash and underscore characters.';
+        }
     }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +33,9 @@
             <input type="submit" name="get-button" id="submit">
             
             <div id="uploaded-files-text">
-
+<?php
+    echo $message;
+?>
             </div>
             <div id="progress-bar" class="hidden">   
                 <label for="progress" class="progress-label"> File progress: </label>
