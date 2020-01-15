@@ -19,7 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Shows progress bar
     function showProgressBar() {
-        document.getElementById("form").addEventListener("submit", showProgress);        // <- do not call the showProgressBar() function (it will be called immediately), write just name - showProgressBar
+        document.getElementById("form").addEventListener("submit", function() {
+            const filesNum = document.getElementById("upload-file").files;
+            if ( filesNum.length > 0 ) {
+                showProgress();
+            }
+        });
     }
 
     function showProgress() {
