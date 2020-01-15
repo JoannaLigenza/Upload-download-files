@@ -5,10 +5,15 @@
 
     if (isset($_POST["get-button"])) {
         $fileName = $_FILES['file-name']['name'];
-        if ( validateFileName($fileName) ) {
-            $message = uploadFiles($fileName);
+        $countFiles = count($fileName);
+        if ( ! empty( $fileName[0] ) ) {
+            if ( validateFileName($fileName) ) {
+                $message = uploadFiles($fileName);
+            } else {
+                $message = 'Change file name before uploading it. <br> File name can only contain letters, digits, space, dash and underscore characters.';
+            }
         } else {
-            $message = 'Change file name before uploading it. <br> File name can only contain letters, digits, space, dash and underscore characters.';
+            $message = 'Choose file to upload first';
         }
     }
 
