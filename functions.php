@@ -3,17 +3,22 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+    function fileExtensions() {
+        $extensions = 'jpg|jpeg|png|gif|tif|tiff|bmp|eps|psd|raw|heic|heif|webp|exif';
+        return $extensions;
+    }
+
     define("uploads", "/uploads/");
     define("readFiles", "/read-files/");
-    // Wyswietla wszystkie pliki - uzyte jest w html przy tabeli 
     // scandir()    <- List files and directories inside the specified path
     // dirname() 	<- Returns a parent directory's path
     // getcwd()     <- Gets the current working directory (in this case: ./up)
 
     function validateFileName($fileName) {
         $result = false;
+        $fileExtensions = fileExtensions();
         for ($i=0; $i < count($fileName); $i++) {
-            if ( preg_match('/^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}(txt|jpg|png)$/i', $fileName[$i]) ) {
+            if ( preg_match('/^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}('.$fileExtensions.')$/i', $fileName[$i]) ) {
                 $result = true;
             } else {
                 return false;
