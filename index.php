@@ -1,7 +1,13 @@
 <?php 
     include "functions.php"; 
 
-    echo ('
+    if (isset($_POST["get-button"])) {
+        echo uploadFiles();
+        //header("Location: ./");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +28,7 @@
             <input type="submit" name="get-button" id="submit">
             
             <div id="uploaded-files-text">
-');
-                if (isset($_POST["get-button"])) {
-                    echo uploadFiles();
-                    //header("Location: ./");
-                }
 
-echo ('
             </div>
             <div id="progress-bar" class="hidden">   
                 <label for="progress" class="progress-label"> File progress: </label>
@@ -45,6 +45,4 @@ echo ('
 <script src="script.js"></script>
 </body>
 </html>
-')
-?>
 
