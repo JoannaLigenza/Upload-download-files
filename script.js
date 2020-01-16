@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-        // Shows message with quantity of uploaded files
+    // Shows message with quantity of uploaded files
     function showMessage() {
         const fileInput = document.getElementById("upload-file");
         fileInput.onchange = function() {
@@ -13,13 +13,32 @@ document.addEventListener('DOMContentLoaded', function() {
             showUploadedFiles.innerText = fileText;
         }
     }
-
     showMessage();
 
+    function validateFileName(files) {
+        const regName = /^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}(jpg|jpeg|png|gif|tif|tiff|bmp|eps|psd|raw|heic|heif|webp|exif)$/i;
+        let result = false;
+        for (let i=0; i < files.length; i++) {
+            const fileName = files[i].name;
+            if ( regName.test(fileName) ) {
+                result = true;
+            } else {
+                return false;
+            }
+        }
+        return result;
+    }
     
     // Shows progress bar
     function showProgressBar() {
-        document.getElementById("form").addEventListener("submit", showProgress);        // <- do not call the showProgressBar() function (it will be called immediately), write just name - showProgressBar
+        document.getElementById("form").addEventListener("submit", function(e) {
+            const filesNum = document.getElementById("upload-file").files;
+            if ( filesNum.length > 0 ) {
+                if ( validateFileName(filesNum) ) {
+                    showProgress();
+                }
+            }
+        });
     }
 
     function showProgress() {

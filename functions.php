@@ -3,12 +3,29 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+    function fileExtensions() {
+        $extensions = 'jpg|jpeg|png|gif|tif|tiff|bmp|eps|psd|raw|heic|heif|webp|exif';
+        return $extensions;
+    }
+
     define("uploads", "/uploads/");
     define("readFiles", "/read-files/");
-    // Wyswietla wszystkie pliki - uzyte jest w html przy tabeli 
     // scandir()    <- List files and directories inside the specified path
     // dirname() 	<- Returns a parent directory's path
     // getcwd()     <- Gets the current working directory (in this case: ./up)
+
+    function validateFileName($fileName) {
+        $result = false;
+        $fileExtensions = fileExtensions();
+        for ($i=0; $i < count($fileName); $i++) {
+            if ( preg_match('/^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}('.$fileExtensions.')$/i', $fileName[$i]) ) {
+                $result = true;
+            } else {
+                return false;
+            }
+        }
+        return $result;
+    }
     
 
     // Make directory and upload files to it
@@ -20,20 +37,19 @@ ini_set('display_errors', 1);
         return $dirName;
     }
 
-    function uploadFiles() {
-        // $fileName = $_FILES["file-name"]["name"] ;      // <- for one file
-        // echo $_FILES["file-name"]["name"] . "<br>";
-        if (strlen($_FILES['file-name']['name'][0] ) !== 0) {
+    // Return message after uploading files
+    function uploadFiles($fileName) {
+        
+        if (strlen($fileName[0] ) !== 0) {
             $dirName = makeDir();
         } else {
             return;
         }
-        //var_dump(strlen($_FILES['file-name']['name'][0] ) === 0) ;
         
-        $countFiles = count($_FILES["file-name"]["name"]);      // <- for multiply files
+        $countFiles = count($fileName);      // <- for multiply files
 
         for ($i=0; $i < $countFiles; $i++) {
-            $path = ".".uploads.$dirName."/". $_FILES["file-name"]["name"][$i];
+            $path = ".".uploads.$dirName."/". $fileName[$i];
             if (move_uploaded_file($_FILES["file-name"]['tmp_name'][$i], $path) ) {
                 //echo "Files uploaded successfully";
             } else {
@@ -58,7 +74,7 @@ ini_set('display_errors', 1);
 
 
 
-    // Pobierz pliki
+    // Download files
     function getFiles() {
         // basename() <- Zwraca końcową nazwę komponentu ścieżki
         $fileName = basename($_GET['file']);
