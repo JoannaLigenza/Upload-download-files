@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showMessage();
 
     function validateFileName(files) {
-        const regName = /^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}(txt|jpg|png)$/i;
+        const regName = /^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}(jpg|jpeg|png|gif|tif|tiff|bmp|eps|psd|raw|heic|heif|webp|exif)$/i;
         let result = false;
         for (let i=0; i < files.length; i++) {
             const fileName = files[i].name;
