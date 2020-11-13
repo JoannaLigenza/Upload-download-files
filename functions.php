@@ -18,6 +18,8 @@ ini_set('display_errors', 1);
         $result = false;
         $fileExtensions = fileExtensions();
         for ($i=0; $i < count($fileName); $i++) {
+            if ((strlen($fileName[$i])) > 100) return false;
+            if (strcmp($fileName[$i], basename($fileName[$i])) !== 0) return false;
             if ( preg_match('/^[a-z0-9-ąćęłńóśżź_\s]{1,}[.]{1}('.$fileExtensions.')$/i', $fileName[$i]) ) {
                 $result = true;
             } else {
