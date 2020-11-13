@@ -1,6 +1,7 @@
 <?php 
     include "../functions.php" ;
-    define("dirCount", count(scandir(dirname(getcwd()).uploads)));
+    $dirCount = countFiles(dirname(getcwd()).uploads); 
+
 
     if (!empty($_GET['delete'])) {
         deleteDir();
@@ -38,11 +39,16 @@ echo('
         </thead>
         <tbody>
 ');
-            // $i=0 => . // $i=1 => .. 
-            for ($i=2; $i<dirCount; $i++) {  
+            // $i=0 => . // $i=1 => ..
+            for ($i=2; $i<$dirCount+2; $i++) {  
                     $name = scandir(dirname(getcwd()).uploads)[$i];
-                    echo "<tr class='toggle-row-click'> <td class='desktop-visible'>" . ($i-1) . "</td> <td class='dir-name'> " . $name . "</td> <td> " . (count(scandir(dirname(getcwd()).uploads.$name)) -2 ). "</td> <td class='toggle-col'> <a href='./?file=$name'> <img src='../img/download.svg' alt='heart-icon' title='Download file'></a>" . "" . "</td> <td class='toggle-col'><a href='./?delete=$name'> <img src='../img/delete.svg' alt='heart-icon' title='Delete file' name='delete-button'></a></td> </tr>";
-                    echo "<tr class='toggle-row hidden'>  <td class='blue-color'> <a href='./?file=$name'> <img src='../img/download.svg' alt='download-icon' title='Download file'></a> </td>    <td class='red-color'> <a href='./?delete=$name'> <img src='../img/delete.svg' alt='delete-icon' title='Delete file' name='delete-button'></a>    </td> </tr>";
+                    echo "<tr class='toggle-row-click'> <td class='desktop-visible'>" . ($i-1) . "</td> <td class='dir-name'> " . $name . "</td>";
+                    echo " <td> " . (countFiles(dirname(getcwd()).uploads.$name)  ). "</td>";
+                    echo "<td class='toggle-col'> <a href='./?file=$name'> <img src='../img/download.svg' alt='heart-icon' title='Download file'></a>" . "" . "</td>";
+                    echo " <td class='toggle-col'><a href='./?delete=$name'> <img src='../img/delete.svg' alt='heart-icon' title='Delete file' name='delete-button'></a></td> </tr>";
+                    echo "<tr class='toggle-row hidden'>  <td class='blue-color'> <a href='./?file=$name'>";
+                    echo " <img src='../img/download.svg' alt='download-icon' title='Download file'></a> </td>";
+                    echo " <td class='red-color'> <a href='./?delete=$name'> <img src='../img/delete.svg' alt='delete-icon' title='Delete file' name='delete-button'></a>    </td> </tr>";
             } 
 echo (' 
         </tbody>
